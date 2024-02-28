@@ -1,88 +1,92 @@
 <template>
-  <main>
-    <Expedition
-      v-model:forest="heroForest"
-      v-model:mountain="heroMountain"
-      v-model:sea="heroSea"
-      v-model:forest-selected="heroForestSelected"
-      v-model:mountain-selected="heroMountainSelected"
-      v-model:sea-selected="heroSeaSelected"
-    />
-    <div>
-      <!-- placeholder -->
-    </div>
-    <Expedition
-      v-model:forest="companionForest"
-      v-model:mountain="companionMountain"
-      v-model:sea="companionSea"
-      v-model:forest-selected="companionForestSelected"
-      v-model:mountain-selected="companionMountainSelected"
-      v-model:sea-selected="companionSeaSelected"
-    />
-    <MovementMessage
-      :top-player="{
-        forest: heroForest,
-        mountain: heroMountain,
-        sea: heroSea,
-        forestSelected: heroForestSelected,
-        mountainSelected: heroMountainSelected,
-        seaSelected: heroSeaSelected
-      }"
-      :bottom-player="{
-        forest: enemyHeroForest,
-        mountain: enemyHeroMountain,
-        sea: enemyHeroSea,
-        forestSelected: enemyHeroForestSelected,
-        mountainSelected: enemyHeroMountainSelected,
-        seaSelected: enemyHeroSeaSelected
-      }"
-    />
-    <button id="reset-button" @click="reset">🔁</button>
-    <MovementMessage
-      :top-player="{
-        forest: companionForest,
-        mountain: companionMountain,
-        sea: companionSea,
-        forestSelected: companionForestSelected,
-        mountainSelected: companionMountainSelected,
-        seaSelected: companionSeaSelected
-      }"
-      :bottom-player="{
-        forest: enemyCompanionForest,
-        mountain: enemyCompanionMountain,
-        sea: enemyCompanionSea,
-        forestSelected: enemyCompanionForestSelected,
-        mountainSelected: enemyCompanionMountainSelected,
-        seaSelected: enemyCompanionSeaSelected
-      }"
-    />
+  <div>
+    <Die id="die"/>
+    <main>
+      <Expedition
+        v-model:forest="heroForest"
+        v-model:mountain="heroMountain"
+        v-model:sea="heroSea"
+        v-model:forest-selected="heroForestSelected"
+        v-model:mountain-selected="heroMountainSelected"
+        v-model:sea-selected="heroSeaSelected"
+      />
+      <div>
+        <!-- placeholder -->
+      </div>
+      <Expedition
+        v-model:forest="companionForest"
+        v-model:mountain="companionMountain"
+        v-model:sea="companionSea"
+        v-model:forest-selected="companionForestSelected"
+        v-model:mountain-selected="companionMountainSelected"
+        v-model:sea-selected="companionSeaSelected"
+      />
+      <MovementMessage
+        :top-player="{
+          forest: heroForest,
+          mountain: heroMountain,
+          sea: heroSea,
+          forestSelected: heroForestSelected,
+          mountainSelected: heroMountainSelected,
+          seaSelected: heroSeaSelected
+        }"
+        :bottom-player="{
+          forest: enemyHeroForest,
+          mountain: enemyHeroMountain,
+          sea: enemyHeroSea,
+          forestSelected: enemyHeroForestSelected,
+          mountainSelected: enemyHeroMountainSelected,
+          seaSelected: enemyHeroSeaSelected
+        }"
+      />
+      <button id="reset-button" @click="reset">🔁</button>
+      <MovementMessage
+        :top-player="{
+          forest: companionForest,
+          mountain: companionMountain,
+          sea: companionSea,
+          forestSelected: companionForestSelected,
+          mountainSelected: companionMountainSelected,
+          seaSelected: companionSeaSelected
+        }"
+        :bottom-player="{
+          forest: enemyCompanionForest,
+          mountain: enemyCompanionMountain,
+          sea: enemyCompanionSea,
+          forestSelected: enemyCompanionForestSelected,
+          mountainSelected: enemyCompanionMountainSelected,
+          seaSelected: enemyCompanionSeaSelected
+        }"
+      />
 
-    <Expedition
-      v-model:forest="enemyHeroForest"
-      v-model:mountain="enemyHeroMountain"
-      v-model:sea="enemyHeroSea"
-      v-model:forest-selected="enemyHeroForestSelected"
-      v-model:mountain-selected="enemyHeroMountainSelected"
-      v-model:sea-selected="enemyHeroSeaSelected"
-    />
-    <div>
-      <!-- placeholder -->
-    </div>
-    <Expedition
-      v-model:forest="enemyCompanionForest"
-      v-model:mountain="enemyCompanionMountain"
-      v-model:sea="enemyCompanionSea"
-      v-model:forest-selected="enemyCompanionForestSelected"
-      v-model:mountain-selected="enemyCompanionMountainSelected"
-      v-model:sea-selected="enemyCompanionSeaSelected"
-    />
-  </main>
+      <Expedition
+        v-model:forest="enemyHeroForest"
+        v-model:mountain="enemyHeroMountain"
+        v-model:sea="enemyHeroSea"
+        v-model:forest-selected="enemyHeroForestSelected"
+        v-model:mountain-selected="enemyHeroMountainSelected"
+        v-model:sea-selected="enemyHeroSeaSelected"
+      />
+      <div>
+        <!-- placeholder -->
+      </div>
+      <Expedition
+        v-model:forest="enemyCompanionForest"
+        v-model:mountain="enemyCompanionMountain"
+        v-model:sea="enemyCompanionSea"
+        v-model:forest-selected="enemyCompanionForestSelected"
+        v-model:mountain-selected="enemyCompanionMountainSelected"
+        v-model:sea-selected="enemyCompanionSeaSelected"
+      />
+    </main>
+  </div>
 </template>
 
 <script setup lang="ts">
 import { ref } from 'vue'
 import Expedition from './components/Expedition.vue'
 import MovementMessage from './components/MovementMessage.vue'
+import Die from './components/Die.vue'
 
 const heroForest = ref(0)
 const heroMountain = ref(0)
@@ -145,10 +149,20 @@ main {
   display: grid;
   grid-template-columns: auto min-content auto;
   grid-template-columns: auto min-content auto;
-	justify-content:space-evenly;
+  justify-content: space-evenly;
+	justify-items: center;
 }
 
 #reset-button {
   font-size: 25px;
+}
+
+#die {
+  position: absolute;
+  left: 5px;
+  top: 47%;
+  bottom: 47%;
+	width: 4%;
+	font-size: 20px;
 }
 </style>

@@ -1,10 +1,11 @@
 <template>
   <section>
+		<button @click="plusAll" class="all-btn"> + all </button>
     <div class="terrain-container forest">
       <button @click="$emit('update:forest', forest + 1)">🔼</button>
-      <div>{{ forest }}</div>
+
       <label
-        >🌲
+        > 🌱 {{ forest }}
         <input
           :checked="forestSelected"
           @change="$emit('update:forestSelected', !forestSelected)"
@@ -16,9 +17,9 @@
 
     <div class="terrain-container mountain">
       <button @click="$emit('update:mountain', mountain + 1)">🔼</button>
-      <div>{{ mountain }}</div>
+      
       <label
-        >⛰️
+        > ⛰️ {{ mountain }}
         <input
           :checked="mountainSelected"
           @change="$emit('update:mountainSelected', !mountainSelected)"
@@ -30,9 +31,8 @@
 
     <div class="terrain-container sea">
       <button @click="$emit('update:sea', sea + 1)">🔼</button>
-      <div>{{ sea }}</div>
       <label
-        >🌊
+        > 🌊 {{ sea }}
         <input
           :checked="seaSelected"
           @change="$emit('update:seaSelected', !seaSelected)"
@@ -41,6 +41,7 @@
       </label>
       <button @click="$emit('update:sea', sea - 1)">🔽</button>
     </div>
+		<button @click="minusAll" class="all-btn"> - all </button>
   </section>
 </template>
 
@@ -53,7 +54,7 @@ const props = defineProps({
   mountainSelected: { type: Boolean, required: true },
   seaSelected: { type: Boolean, required: true }
 })
-defineEmits([
+const emit = defineEmits([
   'update:mountain',
   'update:forest',
   'update:sea',
@@ -61,6 +62,18 @@ defineEmits([
   'update:mountainSelected',
   'update:seaSelected'
 ])
+
+function plusAll(){
+	emit('update:forest', props.forest + 1)
+	emit('update:mountain', props.mountain + 1)
+	emit('update:sea', props.sea + 1)
+}
+
+function minusAll(){
+	emit('update:forest', props.forest - 1)
+	emit('update:mountain', props.mountain - 1)
+	emit('update:sea', props.sea - 1)
+}
 </script>
 
 <style scoped>
@@ -76,6 +89,8 @@ section {
   flex-direction: column;
 	font-size: 20px;
 	padding: 5px;
+	border-radius: 10px;
+	row-gap: 10px;
 }
 
 .terrain-container:has(label > input[type="checkbox"]:not(:checked)){
@@ -90,6 +105,13 @@ button {
   border: none;
   background-color: inherit;
 	font-size: inherit;
+}
+
+.all-btn {
+	background-color: gray;
+	border-radius: 10px;
+	margin: 0 10px;
+	padding: 5px;
 }
 
 .forest {
