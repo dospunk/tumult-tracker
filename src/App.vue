@@ -1,6 +1,6 @@
 <template>
   <div>
-    <Die id="die"/>
+    <Die id="die" />
     <main>
       <Expedition
         v-model:forest="heroForest"
@@ -150,7 +150,7 @@ main {
   grid-template-columns: auto min-content auto;
   grid-template-columns: auto min-content auto;
   justify-content: space-evenly;
-	justify-items: center;
+  justify-items: center;
 }
 
 #reset-button {
@@ -160,9 +160,11 @@ main {
 #die {
   position: absolute;
   left: 5px;
-  top: 47%;
-  bottom: 47%;
-	width: 4%;
-	font-size: 20px;
+  top: 50%;
+  bottom: 50%;
+  width: 40px;
+  height: 40px;
+  transform: translateY(-50%);
+  font-size: 20px;
 }
 </style>
